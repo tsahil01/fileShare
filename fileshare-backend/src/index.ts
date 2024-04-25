@@ -1,9 +1,14 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import ut from "./uploadthing";
+import { cors } from "hono/cors";
+ 
+const app = new Hono();
+app.use(cors());
 
-const app = new Hono()
+app.route("/api/uploadthing", ut);
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) =>
+  c.text("Hello, world!")
+)
 
 export default app
