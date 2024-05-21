@@ -1,5 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { UploadDropzone } from "@/utils/uploadthing";
+import axios from "axios";
 import { useState } from "react";
 
 
@@ -41,6 +43,19 @@ export default function Home() {
         />
         </>
         }
+    <Button onClick={()=>{
+        deleteFile(url);
+        // setUrl("");
+    }} >Delete File</Button>
     </main>
   );
+}
+
+async function deleteFile(url: string) {
+    const del = await axios.delete("/api/uploadthing", {
+        data: {
+            url
+        }
+    });
+    console.log(del.data);
 }
