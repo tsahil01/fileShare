@@ -9,12 +9,21 @@ export const { GET, POST } = createRouteHandler({
 });
 
 export async function DELETE(req: Request){
+
     const data = await req.json();
-    const url = data.url.substring(data.url.lastIndexOf("/") + 1);
-    const utapi = new UTApi();
-    const res = await utapi.deleteFiles(url);
-    return Response.json({
+    try{
+      const url = data.url.substring(data.url.lastIndexOf("/") + 1);
+      const utapi = new UTApi();
+      const res = await utapi.deleteFiles(url);
+      return new Response(JSON.stringify({
         msg: "Deleted",
         res: res
-    })
+      }))
+    }
+    catch(e){
+      return new Response(JSON.stringify({
+        msg: "Error",
+        error: e
+      }))
+    }
 }
