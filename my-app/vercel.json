@@ -2,7 +2,7 @@
     "crons": [
       {
         "path": "/api/uploadthing",
-        "schedule": "1 * * * *",
+        "schedule": "0 5 * * *",
         "method": "DELETE"
       }
     ]
