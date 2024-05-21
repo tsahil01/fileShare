@@ -13,6 +13,5 @@
 - NextJS
 - Tailwind
 - ShadCN
-- CloudFlare workers
 - Uploadthing or AWS S3
 - Prisma using Postgres.
