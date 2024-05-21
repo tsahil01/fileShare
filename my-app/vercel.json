@@ -1,8 +1,9 @@
 {
     "crons": [
       {
-        "path": "/api/cron",
-        "schedule": "0 5 * * *"
+        "path": "/api/uploadthing",
+        "schedule": "1 * * * *",
+        "method": "DELETE"
       }
     ]
   }
