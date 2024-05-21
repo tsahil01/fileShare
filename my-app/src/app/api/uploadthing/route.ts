@@ -14,7 +14,7 @@ export async function DELETE(req: Request){
     try{
       const url = data.url.substring(data.url.lastIndexOf("/") + 1);
       const utapi = new UTApi();
-      const res = await utapi.deleteFiles(url);
+      const res = await utapi.deleteFiles([]);
       return new Response(JSON.stringify({
         msg: "Deleted",
         res: res
