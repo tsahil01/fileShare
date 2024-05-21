@@ -1,3 +1,3 @@
-export default function handler(req: any, res: any) {
-    res.status(200).end('Hello Cron!');
-  }
+export const GET = async (req: Request) => {
+    return new Response("Hello from Vercel Cron");
+    };
