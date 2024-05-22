@@ -18,3 +18,9 @@ export async function DELETE() {
         }))
       }
   }
+
+export async function GET(req: Request) {
+  return new Response(JSON.stringify({
+    msg: "Hello from CRON"
+  }))
+}
