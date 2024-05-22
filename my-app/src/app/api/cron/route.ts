@@ -1,14 +1,36 @@
+import prisma from "@/utils/db";
+import { NextRequest } from "next/server";
 import { UTApi } from "uploadthing/server";
 
-export async function DELETE() {
+export async function DELETE(req: NextRequest) {
+  
+  const authHeader = req.headers.get('authorization');
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response('Unauthorized', {
+      status: 401,
+    });
+  }
     try{
-        // const url = data.url.substring(data.url.lastIndexOf("/") + 1);
-        const url = "e9314c87-d073-4f23-a330-5ce3cd9b93e0-65y24m.pdf"
-        const utapi = new UTApi();
-        const res = await utapi.deleteFiles(url);
+        let allFiles = await prisma.file.findMany();
+        let count = 0;
+        for (let file of allFiles) {
+
+            const utapi = new UTApi();
+            const upt = await utapi.deleteFiles(file.key);
+
+            const neondb = await prisma.file.delete({
+                where: {
+                    id: file.id
+                }
+            });
+
+            console.log("Uploadthing: ",upt);
+            console.log("NeonDB: ",neondb);
+            count++;
+        }
         return new Response(JSON.stringify({
           msg: "Deleted",
-          res: res
+          count: count
         }))
       }
       catch(e){
@@ -19,7 +41,13 @@ export async function DELETE() {
       }
   }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get('authorization');
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response('Unauthorized', {
+      status: 401,
+    });
+  }
   return new Response(JSON.stringify({
     msg: "Hello from CRON"
   }))
