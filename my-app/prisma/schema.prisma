@@ -18,6 +18,7 @@ model File {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
+  key       String
   url       String
   size      Int
   type      String

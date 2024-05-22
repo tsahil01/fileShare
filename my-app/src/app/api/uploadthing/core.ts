@@ -1,3 +1,4 @@
+import prisma from "@/utils/db";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
  
 const f = createUploadthing();
@@ -38,4 +39,3 @@ export const ourFileRouter = {
 };
 
 export type ourFileRouter = typeof ourFileRouter;
-
