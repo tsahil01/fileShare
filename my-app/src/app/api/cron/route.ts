@@ -35,6 +35,7 @@ export async function GET(req: NextRequest) {
         }))
       }
       catch(e){
+        console.log("Error: ",e);
         return new Response(JSON.stringify({
           msg: "Error",
           error: e
