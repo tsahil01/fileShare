@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
             console.log("NeonDB: ",neondb);
             count++;
         }
+        console.log("Deleted all files");
         return new Response(JSON.stringify({
           msg: "Deleted",
           count: count
