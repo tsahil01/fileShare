@@ -1,4 +1,5 @@
 import prisma from "@/utils/db";
+import { stat } from "fs";
 import { NextRequest } from "next/server";
 import { UTApi } from "uploadthing/server";
 
@@ -32,14 +33,16 @@ export async function GET(req: NextRequest) {
         console.log("Deleted all files");
         return new Response(JSON.stringify({
           msg: "Deleted",
-          count: count
+          count: count,
+          status: 200
         }))
       }
       catch(e){
         console.log("Error: ",e);
         return new Response(JSON.stringify({
           msg: "Error",
-          error: e
+          error: e,
+          status: 500
         }))
       }
   }
