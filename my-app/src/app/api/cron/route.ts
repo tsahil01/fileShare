@@ -10,6 +10,7 @@ export async function GET(req: NextRequest) {
       status: 401,
     });
   }
+  console.log("Deleting all files now");
     try{
         let allFiles = await prisma.file.findMany();
         let count = 0;
