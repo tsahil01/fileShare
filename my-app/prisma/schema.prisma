@@ -20,6 +20,7 @@ model File {
   name      String
   key       String
   url       String
+  subdirectory String
   size      Int
   type      String
 }
