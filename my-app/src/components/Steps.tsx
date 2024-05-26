@@ -42,10 +42,6 @@ function CardDetails({title, content, footer, classValue, children }: {title?: s
         <CardContent className="p-2 border-t-2 border-zinc-900 flex justify-center">
             <img className="" src={content} alt="img" />
         </CardContent>
-
-        <CardFooter className="p-3">
-            <div className="text-xs text-zinc-500">{footer}</div>
-        </CardFooter>
     </Card>
     </>
 }
