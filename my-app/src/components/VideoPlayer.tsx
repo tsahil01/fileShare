@@ -6,7 +6,7 @@ export default function VideoPlayer() {
                 <div className="aspect-w-16 aspect-h-9">
                     <iframe
                         className="w-full h-full rounded"
-                        src="https://www.youtube.com/embed/awpONSt1i7s?si=uu4nqZRQgKGAONVB&amp;controls=1"
+                        src="https://www.youtube.com/embed/PHvw0IP7dEU?autoplay=1&start=0&controls=0"
                         title="Video Player"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
