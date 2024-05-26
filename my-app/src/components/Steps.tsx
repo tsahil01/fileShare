@@ -11,7 +11,7 @@ import React from "react"
 
 export default function Steps() {
     return <>
-    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-900 px-3 mt-9">
+    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-900 px-3 md:mt-36 mt-20">
         <CardDetails title="Step-1" content="/step1.gif" classValue="">
             <div className="">
             <span className="">Go to: </span>
