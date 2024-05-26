@@ -6,7 +6,7 @@ export default function VideoPlayer() {
                     <iframe
                         className="rounded-xl w-full h-full"
                         src="https://www.youtube.com/embed/awpONSt1i7s?si=uu4nqZRQgKGAONVB&amp;controls=1"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        title="Video Player"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allowFullScreen
                     ></iframe>
