@@ -23,7 +23,7 @@ export default function Page({params}: {params: {filename: string}}) {
             <h1 className="text-4xl font-bold">UploadThing Example</h1>
             {url && 
                 <div className="w-full h-full flex flex-col justify-center mx-auto border">
-                    <iframe src={url} className="h-full w-full" />
+                    <iframe src={url} className="h-full w-full" title="File Preview" />
                 </div>}
             {!url && <>
             
@@ -57,10 +57,6 @@ export default function Page({params}: {params: {filename: string}}) {
             />
             </>
             }
-        <Button onClick={()=>{
-            deleteFile(url);
-            // setUrl("");
-        }} >Delete File</Button>
         </main>
     );
 }
