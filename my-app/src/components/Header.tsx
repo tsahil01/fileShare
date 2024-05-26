@@ -7,7 +7,9 @@ export default function Header() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-200">Share Your Files </span> 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-800">Anywhere!</span> 
             </h1>    
-            <div className="text-xs md:text-xl text-zinc-400 text-center max-w-sm md:max-w-2xl mt-4 md:px-4 px-7 text-transparent bg-clip-text bg-gradient-to-b from-zinc-200 to-zinc-800">Simplify your file sharing experience with our intuitive platform. Seamlessly upload, share, and access your files anytime, anywhere. Start sharing smarter today!</div>
+            <div className="text-xs md:text-center text-justify max-w-sm md:max-w-2xl mt-4 md:px-4 px-7 text-transparent bg-clip-text bg-gradient-to-b from-zinc-500 to-zinc-800">
+            Simplify your file sharing experience with our intuitive platform. 
+            Seamlessly upload, share, and access your files anytime, anywhere. Start sharing smarter today!</div>
         </div>
         </>
        );
