@@ -6,7 +6,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-
 export default function Page({params}: {params: {filename: string}}) {
     const [url, setUrl] = useState("");
 
@@ -24,7 +23,8 @@ export default function Page({params}: {params: {filename: string}}) {
     }, []);
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-zinc-900 text-white">
+        <main className="flex flex-col w-full bg-zinc-950 text-white min-h-screen px-2 overflow-auto">
+            <div className="md:max-w-screen-2xl md:pt-36 pt-20 sm:pb-20 md:pb-10 mx-auto sm:mx-12 text-white border-x-2 border-zinc-900 min-h-screen">
             <h1 className="text-4xl font-bold">UploadThing Example</h1>
             {url && 
                 <div className="w-full h-full flex flex-col justify-center mx-auto border">
@@ -62,6 +62,7 @@ export default function Page({params}: {params: {filename: string}}) {
             />
             </>
             }
+            </div>
         </main>
     );
 }

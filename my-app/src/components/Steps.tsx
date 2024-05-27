@@ -11,13 +11,13 @@ import React from "react"
 
 export default function Steps() {
     return <>
-    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-900 px-3 md:mt-36 mt-20">
+    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-900 px-3 md:px-9 md:mt-36 mt-20">
         <CardDetails title="Step-1" content="/step1.gif" classValue="">
             <div className="">
             <span className="">Go to: </span>
             <span className="rounded bg-zinc-950 hover:underline hover:bg-zinc-900">
                 <span className="text-white italic">ezfiles.vercel.app/ </span>
-                <span className="text-white italic font-bold">anyRandomString</span>
+                <span className="text-white italic font-bold">anyString</span>
             </span>
             </div>
         </CardDetails>
