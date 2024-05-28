@@ -27,7 +27,9 @@ export default function Page({ params }: { params: { filename: string } }) {
             } catch (error) {
                 toast.error("Error fetching data", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
             }
         }
         init();
