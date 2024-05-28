@@ -6,7 +6,7 @@ const f = createUploadthing();
 
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({ image: { maxFileSize: "8MB" } })
   .onUploadError(async ({ error }) => {
         // This code RUNS ON YOUR SERVER after upload
         console.log("Upload error:", error);
@@ -26,7 +26,7 @@ export const ourFileRouter = {
       return { success: true, url: file.url };
     }),
 
-    pdfUploader: f({ pdf: { maxFileSize: "4MB" } })
+    pdfUploader: f({ pdf: { maxFileSize: "8MB" } })
     .onUploadError(async ({ error }) => {
         // This code RUNS ON YOUR SERVER after upload
         console.log("Upload error:", error);
