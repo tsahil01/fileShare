@@ -22,7 +22,7 @@ export default function Steps() {
             </div>
         </CardDetails>
 
-        <CardDetails title="Step-2" content="/step1.gif" classValue="">
+        <CardDetails title="Step-2" content="/step2.gif" classValue="">
             <div className="">
             <span className="">Upload your file </span>
             </div>
