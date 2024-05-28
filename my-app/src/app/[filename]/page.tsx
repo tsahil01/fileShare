@@ -42,17 +42,24 @@ export default function Page({ params }: { params: { filename: string } }) {
                 <div className="flex flex-col w-full justify-center items-center gap-5 p-5 h-screen">
                     {loading ? (
                         <>
-                            <Skeleton className="w-1/2 p-4">
-                                <div className="h-64 bg-gray-700 rounded mb-4"></div>
-                                <div className="h-10 bg-gray-700 rounded w-1/2 mb-4"></div>
-                            </Skeleton>
-                            <Skeleton className="w-1/2 p-4">
-                                <div className="h-64 bg-gray-700 rounded mb-4"></div>
-                                <div className="h-10 bg-gray-700 rounded w-1/2 mb-4"></div>
-                            </Skeleton>
+                            <div className="flex flex-col space-y-3 mb-4">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl bg-zinc-900" />
+                                <div className="space-y-2">
+                                    <Skeleton className="h-4 w-[250px] bg-zinc-900" />
+                                    <Skeleton className="h-4 w-[200px] bg-zinc-900" />
+                                </div>
+                            </div>
+                            <div className="flex flex-col space-y-3 mb-4">
+                                <Skeleton className="h-[125px] w-[250px] rounded-xl bg-zinc-900" />
+                                <div className="space-y-2">
+                                    <Skeleton className="h-4 w-[250px] bg-zinc-900" />
+                                    <Skeleton className="h-4 w-[200px] bg-zinc-900" />
+                                </div>
+                            </div>
+
                         </>
                     ) : url ? (
-                        <div className="w-full h-full flex justify-center items-center mx-auto rounded-xl p-2">
+                        <div className="w-full h-full flex justify-center items-center mx-auto  rounded-xl p-2">
                             {isImg ? (
                                 <img src={url} className="rounded-lg max-w-full max-h-full" alt="File Preview" />
                             ) : (
@@ -62,7 +69,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                     ) : (
                         <>
                             <UploadDropzone
-                                className="mb-4 border border-white rounded-xl border-solid bg-zinc-900 text-white p-4 w-auto h-auto overflow-auto"
+                                className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
                                 endpoint="imageUploader"
                                 onClientUploadComplete={(res) => {
                                     console.log("Files: ", res);
@@ -75,7 +82,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                                 }}
                             />
                             <UploadDropzone
-                                className="mb-4 border border-white rounded-xl border-solid bg-zinc-900 text-white p-4 w-auto h-auto overflow-auto"
+                                className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
                                 endpoint="pdfUploader"
                                 onClientUploadComplete={(res) => {
                                     console.log("Files: ", res);
