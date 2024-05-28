@@ -1,77 +1,96 @@
 "use client";
 
 import { checkSubdirectory, dbPush } from "@/actions/db";
+import { Skeleton } from "@/components/ui/skeleton";
 import { UploadDropzone } from "@/utils/uploadthing";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-export default function Page({params}: {params: {filename: string}}) {
+export default function Page({ params }: { params: { filename: string } }) {
     const [url, setUrl] = useState("");
+    const [isImg, setIsImg] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        async function init(){
-        let subDir = await checkSubdirectory(params.filename);
-        if(subDir)
-            toast.success("File Found", {duration: 2000, style: {color: "black", backgroundColor:"white", border:"0px"}});
-        setUrl(subDir);
+    useEffect(() => {
+        async function init() {
+            try {
+                let subDir = await checkSubdirectory(params.filename);
+                console.log("SubDir: ", subDir);
+                if (subDir){
+                    if(subDir.includes(".png") || subDir.includes(".jpg") || subDir.includes(".jpeg") || subDir.includes(".gif") || subDir.includes(".webp")){
+                        setIsImg(true);
+                    }
+                    toast.success("File Found", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                }
+                setUrl(subDir);
+            } catch (error) {
+                toast.error("Error fetching data", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+            } finally {
+                setLoading(false);
+            }
         }
         init();
         return () => {
             console.log("Unmounting");
         }
-    }, []);
+    }, [params.filename]);
 
     return (
-        <main className="flex flex-col w-full bg-zinc-950 text-white min-h-screen px-2 overflow-auto">
-            <div className="md:max-w-screen-2xl md:pt-36 pt-20 sm:pb-20 md:pb-10 mx-auto sm:mx-12 text-white border-x-2 border-zinc-900 min-h-screen">
-            <h1 className="text-4xl font-bold">UploadThing Example</h1>
-            {url && 
-                <div className="w-full h-full flex flex-col justify-center mx-auto border">
-                    <iframe src={url} className="h-full w-full" title="File Preview" />
-                </div>}
-            {!url && <>
-            
-        <UploadDropzone
-            endpoint="imageUploader" 
-            onClientUploadComplete={(res) => {
-                // Do something with the response
-                console.log("Files: ", res);
-                setUrl(res[0].url);
-                dbPush(res[0], params.filename);
-                toast.success("File Uploaded", {duration: 2000, style: {color: "black", backgroundColor:"white", border:"0px"}});
-            }}
-            onUploadError={(error: Error) => {
-                // Do something with the error
-                toast.error("Error Uploading File", {duration: 2000, position: "top-right", style: {color: "black", backgroundColor:"white", border:"0px"}});
-            }}
-            />
-        <UploadDropzone
-            endpoint="pdfUploader"
-            onClientUploadComplete={(res) => {
-                // Do something with the response
-                console.log("Files: ", res);
-                setUrl(res[0].url);
-                dbPush(res[0], params.filename);
-                toast.success("File Uploaded", {duration: 2000, style: {color: "black", backgroundColor:"white", border:"0px"}});
-            }}
-            onUploadError={(error: Error) => {
-                // Do something with the error.\
-                toast.error("Error Uploading File", {duration: 2000, position: "top-right", style: {color: "black", backgroundColor:"white", border:"0px"}});
-            }}
-            />
-            </>
-            }
+        <main className="bg-zinc-950 text-white min-h-screen px-2 overflow-auto">
+            <div className="md:max-w-screen-2xl mx-auto sm:mx-12 text-white border-x-2 border-zinc-900 min-h-screen flex justify-center items-center">
+                <div className="flex flex-col w-full justify-center items-center gap-5 p-5 h-screen">
+                    {loading ? (
+                        <>
+                            <Skeleton className="w-1/2 p-4">
+                                <div className="h-64 bg-gray-700 rounded mb-4"></div>
+                                <div className="h-10 bg-gray-700 rounded w-1/2 mb-4"></div>
+                            </Skeleton>
+                            <Skeleton className="w-1/2 p-4">
+                                <div className="h-64 bg-gray-700 rounded mb-4"></div>
+                                <div className="h-10 bg-gray-700 rounded w-1/2 mb-4"></div>
+                            </Skeleton>
+                        </>
+                    ) : url ? (
+                        <div className="w-full h-full flex justify-center items-center mx-auto rounded-xl p-2">
+                            {isImg ? (
+                                <img src={url} className="rounded-lg max-w-full max-h-full" alt="File Preview" />
+                            ) : (
+                                <iframe src={url} className="rounded-lg w-full h-full max-w-full max-h-full" title="File Preview"></iframe>
+                            )}
+                        </div>
+                    ) : (
+                        <>
+                            <UploadDropzone
+                                className="mb-4 border border-white rounded-xl border-solid bg-zinc-900 text-white p-4 w-auto h-auto overflow-auto"
+                                endpoint="imageUploader"
+                                onClientUploadComplete={(res) => {
+                                    console.log("Files: ", res);
+                                    setUrl(res[0].url);
+                                    dbPush(res[0], params.filename);
+                                    toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                }}
+                                onUploadError={(error: Error) => {
+                                    toast.error("Error Uploading File", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                }}
+                            />
+                            <UploadDropzone
+                                className="mb-4 border border-white rounded-xl border-solid bg-zinc-900 text-white p-4 w-auto h-auto overflow-auto"
+                                endpoint="pdfUploader"
+                                onClientUploadComplete={(res) => {
+                                    console.log("Files: ", res);
+                                    setUrl(res[0].url);
+                                    dbPush(res[0], params.filename);
+                                    toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                }}
+                                onUploadError={(error: Error) => {
+                                    toast.error("Error Uploading File", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                }}
+                            />
+                        </>
+                    )}
+                </div>
             </div>
         </main>
     );
-}
-
-async function deleteFile(url: string) {
-    const del = await axios.delete("/api/uploadthing", {
-        data: {
-            url
-        }
-    });
-    console.log(del.data);
 }
