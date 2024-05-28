@@ -61,9 +61,9 @@ export default function Page({ params }: { params: { filename: string } }) {
 
                         </>
                     ) : url ? (
-                        <div className="w-full h-full flex justify-center items-center mx-auto  rounded-xl p-2">
+                        <div className="w-full h-full flex justify-center items-center mx-auto rounded-xl p-2">
                             {isImg ? (
-                                <img src={url} className="rounded-lg max-w-full max-h-full" alt="File Preview" />
+                                <img src={url} className="rounded-lg contain w-full h-full object-contain border border-zinc-900" alt="File Preview" />
                             ) : (
                                 <iframe src={url} className="rounded-lg w-full h-full max-w-full max-h-full" title="File Preview"></iframe>
                             )}
