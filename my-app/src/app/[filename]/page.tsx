@@ -39,7 +39,7 @@ export default function Page({ params }: { params: { filename: string } }) {
     }, [params.filename]);
 
     return (
-        <main className="bg-zinc-950 text-white min-h-screen px-2 overflow-auto">
+        <main className="bg-gradient-to-t from-zinc-950 to-black text-white min-h-screen px-2 overflow-auto">
             <div className="md:max-w-screen-2xl mx-auto sm:mx-12 text-white border-x-2 border-zinc-900 min-h-screen flex justify-center items-center">
                 <div className="flex flex-col w-full justify-center items-center gap-5 p-5 h-screen">
                     {loading ? (
