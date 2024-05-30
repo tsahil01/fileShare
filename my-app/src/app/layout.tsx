@@ -6,6 +6,7 @@ import "@uploadthing/react/styles.css";
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner";
 import type { Viewport } from 'next'
+import { Analytics } from "@vercel/analytics/react"
  
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+      <Analytics/>
       <body className={cn(
           "min-h-screen bg-background font-sans",
           fontSans.variable
