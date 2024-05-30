@@ -1,8 +1,15 @@
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "../api/uploadthing/core";
+import { Metadata } from "next";
  
  
+export const metadata: Metadata = {
+  title: "Files | Quick Share - Effortlessly Share Your Files Anywhere!", 
+  description: "Here you can view and share your files. Simplify your file sharing experience with our intuitive platform. Seamlessly upload, share, and access your files anytime, anywhere. Start sharing smarter today!",
+};
+
+
 export default function RootLayout({
   children,
 }: {
