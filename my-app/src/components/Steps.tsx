@@ -27,6 +27,13 @@ export default function Steps() {
             <span className="">Upload your file </span>
             </div>
         </CardDetails>
+
+        <CardDetails title="Step-3" content="/step3.gif" classValue="">
+            <div className="">
+            <span className="">Access your files for 24 hrs! </span>
+            <span className="">Share the link with anyone with! </span>
+            </div>
+        </CardDetails>
         </div>
     </>
 }
@@ -40,7 +47,7 @@ function CardDetails({title, content, footer, classValue, children }: {title?: s
         </CardHeader>
 
         <CardContent className="p-2 border-t-2 border-zinc-900 flex justify-center">
-            <img className="" src={content} alt="img" />
+            <img className="border-2 border-zinc-700 rounded-md" src={content} alt="img" />
         </CardContent>
     </Card>
     </>
