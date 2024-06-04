@@ -1,7 +1,7 @@
 export default function VideoPlayer() {
     return (
         <>
-        <div className="w-full border-y-2 border-zinc-900 md:my-20 my-10 py-2">
+        <div className="w-full border-y-2 border-zinc-700 md:my-20 my-10 py-2">
             <div className="md:max-w-4xl mx-auto px-3">
                 <div className="aspect-w-16 aspect-h-9">
                     <iframe

@@ -11,7 +11,7 @@ import React from "react"
 
 export default function Steps() {
     return <>
-    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-900 px-3 md:px-28 md:mt-36 mt-20">
+    <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-800 px-3 md:px-28 md:mt-36 mt-20">
         <CardDetails title="Step-1" content="/step1.gif" classValue="">
             <div className="">
             <span className="">Go to: </span>
@@ -28,7 +28,7 @@ export default function Steps() {
             </div>
         </CardDetails>
 
-        <CardDetails title="Step-3" content="/step3.gif" classValue="">
+        <CardDetails title="Step-3" content="/step3.gif" classValue="border-b-0">
             <div className="">
             <span className="">Access your files for 24 hrs! </span>
             <span className="">Share the link with anyone with! </span>
@@ -40,7 +40,7 @@ export default function Steps() {
 
 function CardDetails({title, content, footer, classValue, children }: {title?: string, content?: string, footer?: string, classValue?: string, children: React.ReactNode}){
     return <>
-    <Card className={`w-full rounded-none border-zinc-900 border-0 border-x-2 border-b-2 pt-3 ${classValue}`}>
+    <Card className={`w-full rounded-none border-zinc-800 border-0 border-x-2 border-b-2 pt-3 ${classValue}`}>
         <CardHeader className="p-3">
             <CardTitle className="text-2xl text-transparent bg-clip-text bg-gradient-to-b from-zinc-100 to-zinc-700">{title}</CardTitle>
             <CardDescription className="text-sm text-zinc-500">{children}</CardDescription>
