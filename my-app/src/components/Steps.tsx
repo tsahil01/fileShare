@@ -14,11 +14,14 @@ export default function Steps() {
     <div className="flex flex-col gap-0 items-center justify-around border-y-2 border-zinc-800 px-3 md:px-28 md:mt-36 mt-20">
         <CardDetails title="Step-1" content="/step1.gif" classValue="">
             <div className="">
-            <span className="">Go to: </span>
-            <span className="rounded bg-zinc-950 hover:underline hover:bg-zinc-900">
-                <span className="text-white italic">ezfiles.vercel.app/ </span>
-                <span className="text-white italic font-bold">anyString</span>
-            </span>
+                <span className="rounded flex flex-col gap-1">
+                    <span className="hover:underline">
+                        <span className="">Go to: </span>
+                        <span className="text-white italic">ezfiles.vercel.app/ </span>
+                        <span className="text-white italic font-bold">yourKeyword</span> <br/>
+                    </span>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600">Replace <span className="text-white"> yourKeyword </span> with your custom word.</span>
+                </span>
             </div>
         </CardDetails>
 
