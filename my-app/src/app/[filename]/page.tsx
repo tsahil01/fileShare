@@ -96,7 +96,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                             </div>
 
                             <div className="flex flex-col text-center my-9">
-                                <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-900">PDF Uploader</h1>
+                                <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-900">PDF Uploader:</h1>
                                 <UploadDropzone
                                     className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
                                     endpoint="pdfUploader"
