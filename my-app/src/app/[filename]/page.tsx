@@ -6,6 +6,10 @@ import { UploadDropzone } from "@/utils/uploadthing";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+function checkImage(url: string) {
+    return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
+
 export default function Page({ params }: { params: { filename: string } }) {
     const [url, setUrl] = useState("");
     const [isImg, setIsImg] = useState(false);
@@ -24,7 +28,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                 }
                 setUrl(subDir);
             } catch (error) {
-                toast.error("Error fetching data", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                toast.error(`Error fetching data: ${error}`, { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
             } finally {
                 setTimeout(() => {
                     setLoading(false);
@@ -61,7 +65,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                         </>
                     ) : url ? (
                         <div className="w-full h-full flex justify-center items-center mx-auto rounded-xl p-2">
-                            {isImg ? (
+                            {isImg || checkImage(url) ? (
                                 <img src={url} className="rounded-lg contain w-full h-full object-contain border border-zinc-900" alt="File Preview" />
                             ) : (
                                 <iframe src={url} className="rounded-lg w-full h-full max-w-full max-h-full" title="File Preview"></iframe>
@@ -69,32 +73,49 @@ export default function Page({ params }: { params: { filename: string } }) {
                         </div>
                     ) : (
                         <>
-                            <UploadDropzone
-                                className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
-                                endpoint="imageUploader"
-                                onClientUploadComplete={(res) => {
-                                    console.log("Files: ", res);
-                                    setUrl(res[0].url);
-                                    dbPush(res[0], (params.filename).toLowerCase());
-                                    toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
-                                }}
-                                onUploadError={(error: Error) => {
-                                    toast.error("Error Uploading File", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
-                                }}
-                            />
-                            <UploadDropzone
-                                className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
-                                endpoint="pdfUploader"
-                                onClientUploadComplete={(res) => {
-                                    console.log("Files: ", res);
-                                    setUrl(res[0].url);
-                                    dbPush(res[0], (params.filename).toLowerCase());
-                                    toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
-                                }}
-                                onUploadError={(error: Error) => {
-                                    toast.error("Error Uploading File", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
-                                }}
-                            />
+                            <div className="flex text-center flex-col my-9">
+                                <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-900">Image Uploader:</h1>
+                                <UploadDropzone
+                                    className="border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
+                                    endpoint="imageUploader"
+                                    onClientUploadComplete={(res) => {
+                                        console.log("Files: ", res);
+                                        setUrl(res[0].url);
+                                        dbPush(res[0], (params.filename).toLowerCase());
+                                        toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                    }}
+                                    onUploadError={(error: Error) => {
+                                        const msg = JSON.stringify(error);
+                                        if (typeof msg === "string" && msg.includes("FileSizeMismatch")) {
+                                            toast.error("Error Uploading File: File Size Mismatch", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                        } else {
+                                            toast.error(`Error Uploading File: ${error}`, { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                        }
+                                    }}
+                                />
+                            </div>
+
+                            <div className="flex flex-col text-center my-9">
+                                <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-900">PDF Uploader</h1>
+                                <UploadDropzone
+                                    className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
+                                    endpoint="pdfUploader"
+                                    onClientUploadComplete={(res) => {
+                                        console.log("Files: ", res);
+                                        setUrl(res[0].url);
+                                        dbPush(res[0], (params.filename).toLowerCase());
+                                        toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                    }}
+                                    onUploadError={(error: Error) => {
+                                        const msg = JSON.stringify(error);
+                                        if (typeof msg === "string" && msg.includes("FileSizeMismatch")) {
+                                            toast.error("Error Uploading File: File Size Mismatch", { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                        } else {
+                                            toast.error(`Error Uploading File: ${error}`, { duration: 2000, position: "top-right", style: { color: "black", backgroundColor: "white", border: "0px" } });
+                                        }
+                                    }}
+                                    />
+                            </div>
                         </>
                     )}
                 </div>
