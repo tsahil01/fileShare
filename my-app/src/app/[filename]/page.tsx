@@ -19,7 +19,7 @@ export default function Page({ params }: { params: { filename: string } }) {
         async function init() {
             try {
                 let subDir = await checkSubdirectory((params.filename).toLowerCase());
-                console.log("SubDir: ", subDir);
+                // console.log("SubDir: ", subDir);
                 if (subDir){
                     if(subDir.includes(".png") || subDir.includes(".jpg") || subDir.includes(".jpeg") || subDir.includes(".gif") || subDir.includes(".webp")){
                         setIsImg(true);
@@ -37,7 +37,7 @@ export default function Page({ params }: { params: { filename: string } }) {
         }
         init();
         return () => {
-            console.log("Unmounting");
+            // console.log("Unmounting");
         }
     }, [params.filename]);
 
@@ -79,7 +79,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                                     className="border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
                                     endpoint="imageUploader"
                                     onClientUploadComplete={(res) => {
-                                        console.log("Files: ", res);
+                                        // console.log("Files: ", res);
                                         setUrl(res[0].url);
                                         dbPush(res[0], (params.filename).toLowerCase());
                                         toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
@@ -101,7 +101,7 @@ export default function Page({ params }: { params: { filename: string } }) {
                                     className="mb-4 border-4 border-zinc-900 rounded border-solid bg-zinc-950 text-white p-4 w-auto h-auto overflow-auto"
                                     endpoint="pdfUploader"
                                     onClientUploadComplete={(res) => {
-                                        console.log("Files: ", res);
+                                        // console.log("Files: ", res);
                                         setUrl(res[0].url);
                                         dbPush(res[0], (params.filename).toLowerCase());
                                         toast.success("File Uploaded", { duration: 2000, style: { color: "black", backgroundColor: "white", border: "0px" } });
